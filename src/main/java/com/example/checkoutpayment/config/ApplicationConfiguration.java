@@ -20,7 +20,7 @@ public class ApplicationConfiguration {
 
     @Bean
     public WebClient createWebClient() {
-        return WebClient.builder().baseUrl("http://localhost:7878")
+        return WebClient.builder().baseUrl("http://host.docker.internal:7878")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }

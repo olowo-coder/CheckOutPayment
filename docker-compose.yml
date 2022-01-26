@@ -6,40 +6,30 @@ services:
     ports:
       - "8092:8080"
     container_name: payment-container
-    extra_hosts:
-      - "host.docker.internal:127.0.0.1"
     links:
       - mongodb:app_db
-#    depends_on:
-#      - mongodb
     networks:
       - shared-net
+
 
   mongodb:
     image: mongo
     ports:
       - "27019:27017"
     container_name: mongo-server-2
-#    environment:
-#      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
-#      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
-#      - MONGO_INITDB_DATABASE=${MONGO_ROOT_DATABASE}
     networks:
       - shared-net
 
   mongo-express:
     image: mongo-express
     container_name: mongo-express-ui-2
-#    depends_on:
-#      - mongodb
     ports:
       - "8081:8081"
     environment:
-#      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_ROOT_USER}
-#      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_ROOT_PASSWORD}
       - ME_CONFIG_MONGODB_SERVER=mongodb
     networks:
       - shared-net
+
 networks:
   shared-net:
     driver: bridge
